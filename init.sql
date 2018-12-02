@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `allsponsored`.`project` (
   `url_summary` LONGTEXT NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `user_id`),
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_project_user`
     FOREIGN KEY (`user_id`)
     REFERENCES `allsponsored`.`user` (`id`)
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `allsponsored`.`contract` (
   `status` VARCHAR(45) NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `project_id`, `club_id`),
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_contract_project2`
     FOREIGN KEY (`project_id`)
     REFERENCES `allsponsored`.`project` (`id`)
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `allsponsored`.`order` (
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `contract_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `contract_id`),
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_order_contract1`
     FOREIGN KEY (`contract_id`)
     REFERENCES `allsponsored`.`contract` (`id`)
@@ -194,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `allsponsored`.`survey` (
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL,
   `contract_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `contract_id`),
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_survey_contract1`
     FOREIGN KEY (`contract_id`)
     REFERENCES `allsponsored`.`contract` (`id`)
@@ -240,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `allsponsored`.`survey_has_question` (
   `question_id` INT NOT NULL,
   `answer` INT NULL,
   `comment` LONGTEXT NULL,
-  PRIMARY KEY (`id`, `survey_id`, `question_id`),
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_survey_has_question_survey1`
     FOREIGN KEY (`survey_id`)
     REFERENCES `allsponsored`.`survey` (`id`)
@@ -296,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `allsponsored`.`action` (
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `contract_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `contract_id`),
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_action_contract1`
     FOREIGN KEY (`contract_id`)
     REFERENCES `allsponsored`.`contract` (`id`)
