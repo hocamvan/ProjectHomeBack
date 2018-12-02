@@ -8,6 +8,9 @@ const genericCrud = require('./src/routes/genericCrud')
 
 
 
+
+
+
 app.use(morgan("dev"));
 app.use(cors())
 app.use(bodyParser.json());
