@@ -4,9 +4,8 @@ const cors = require ('cors');
 const bodyParser = require('body-parser')
 
 const app = express();
-const genericCrud = require('./src/routes/genericCrud')
-
-
+//const genericCrud = require('./src/routes/genericCrud')
+const clubs = require('./src/routes/clubs')
 
 
 
@@ -16,9 +15,9 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-// app.use("/users", users);
-// app.use("/clubs", clubs);
-app.use("/api",genericCrud)
+//app.use("/users", users);
+app.use("/clubs", clubs);
+//app.use("/api",genericCrud)
 
 
 app.get('/',(req,res)=>{
