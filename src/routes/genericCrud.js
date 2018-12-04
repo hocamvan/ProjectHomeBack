@@ -1,7 +1,7 @@
 const express = require('express');
 const connection = require('../helper/conf')
 const router = express.Router();
-const tables = ['club', 'order'];
+const tables = ['club', 'order','user'];
 const isTableNotAuthorized = (table) => {
     return !tables.includes(table.toLowerCase());
 };
@@ -41,11 +41,12 @@ router.post('/:table', (req, res) => {
     connection.query('INSERT into ' + req.params.table + ' SET ?', req.body, (err, results) => {
         if (err) {
             console.log(err);
+            console.log(req.body);
             res.status(500).send("Erreur lors de la sauvegarde d'un " + req.params.table);
         }
         else {
             const insertId = results.insertId;
-            res.sendStatus(200).send({ insertId });
+            res.json({ insertId });
         }
     })
 });
@@ -65,7 +66,7 @@ router.put('/:table/:id', (req, res) => {
             res.status(500).send("Erreur lors de la modification d'un " + req.params.table);
         } else {
             const affectedRows = results.affectedRows;
-            res.sendStatus(200).send({ affectedRows });
+            res.json({ affectedRows });
         }
 
     })
@@ -81,7 +82,7 @@ router.delete('/:table/:id', (req, res) => {
             res.status(500).send("Erreur lors de la modification d'un " + req.params.table);
         } else {
             const affectedRows = results.affectedRows;
-            res.sendStatus(200).send({ affectedRows });
+            res.json({ affectedRows });
         }
 
     })
