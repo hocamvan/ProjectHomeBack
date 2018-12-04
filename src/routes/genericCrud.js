@@ -44,26 +44,28 @@ router.post('/:table', (req, res) => {
             res.status(500).send("Erreur lors de la sauvegarde d'un " + req.params.table);
         }
         else {
-            res.sendStatus(200);
+            const insertId = results.insertId;
+            res.sendStatus(200).send({ insertId });
         }
     })
 });
 router.put('/:table/:id', (req, res) => {
     const idEmployee = req.params.id;
     const formData = req.body;
-    console.log({formData});
+    console.log({ formData });
     formData.updated_at = new Date();
-    console.log({formData});
+    console.log({ formData });
     if (isTableNotAuthorized(req.params.table)) {
         res.send(400);
         return;
     }
-    connection.query('UPDATE ' + req.params.table + ' SET ? WHERE id = ?', [formData, idEmployee], err => {
+    connection.query('UPDATE ' + req.params.table + ' SET ? WHERE id = ?', [formData, idEmployee], (err, results) => {
         if (err) {
             console.log(err);
             res.status(500).send("Erreur lors de la modification d'un " + req.params.table);
         } else {
-            res.sendStatus(200);
+            const affectedRows = results.affectedRows;
+            res.sendStatus(200).send({ affectedRows });
         }
 
     })
@@ -73,12 +75,13 @@ router.delete('/:table/:id', (req, res) => {
         res.send(400);
         return;
     }
-    connection.query('DELETE FROM ' + req.params.table +' WHERE id =?',req.params.id, err => {
+    connection.query('DELETE FROM ' + req.params.table + ' WHERE id =?', req.params.id, (err, results) => {
         if (err) {
             console.log(err);
             res.status(500).send("Erreur lors de la modification d'un " + req.params.table);
         } else {
-            res.sendStatus(200);
+            const affectedRows = results.affectedRows;
+            res.sendStatus(200).send({ affectedRows });
         }
 
     })
