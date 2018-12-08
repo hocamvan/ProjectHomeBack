@@ -1,82 +1,44 @@
-const express = require('express');
-const connection = require('../helper/conf.js');
-const jwt = require('jsonwebtoken');
+// app/routes.js
+module.exports = function (app, passport) {
 
-const Router = express.Router();
-const jwtSecret = require('../../jwtSecret');
 
-Router.get('/', (req, res) => {
-    connection.query('SELECT * from club', (err, results) => {
-        if (err) {
-            res.status(500).send('Erreur lors de la récupération des employés');
-        } else {
-            res.json(results);
-        }
-    });
-})
-Router.post('/signin', (req, res) => {
-    connection.query('select password from club where email = ?', req.body.name, (err, results) => {
-        console.log("check", results[0].password);
-        if (results[0].password === req.body.password) {
-            const tokenInfo = {
-                name: req.body.name,
-                role: "club"
+    // process the login form
+    app.post('/signin', passport.authenticate('local-login', {
+        successRedirect: '/api/club', // redirect to the secure profile section
+        failureRedirect: '/login', // redirect back to the signup page if there is an error
+        failureFlash: true // allow flash messages
+    }),
+        function (req, res) {
+            console.log("hello");
+
+            if (req.body.remember) {
+                req.session.cookie.maxAge = 1000 * 60 * 3;
+            } else {
+                req.session.cookie.expires = false;
             }
-        }
-    })
-    if(tokenInfo){
-        const token = jwt.sign(tokenInfo, jwtSecret)
-        console.log(token);
-        res.header("Access-Control-Expose-Headers", "x-access-token")
-        res.set('x-access-token', token)
-        res.status(200).send({ info: 'user connected' })
+            res.redirect('/');
+        });
+
+        // =====================================
+	// SIGNUP ==============================
+	// =====================================
+	// show the signup form
+
+	// process the signup form
+	app.post('/signup', passport.authenticate('local-signup', {
+		successRedirect : '/', // redirect to the secure profile section
+		failureRedirect : '/signup', // redirect back to the signup page if there is an error
+		failureFlash : true // allow flash messages
+	}));
+
+    // route middleware to make sure
+    function isLoggedIn(req, res, next) {
+
+        // if user is authenticated in the session, carry on
+        if (req.isAuthenticated())
+            return next();
+
+        // if they aren't redirect them to the home page
+        res.redirect('/');
     }
-    // console.log(req.body);
-    // if (req.body.name === 'lolo' && req.body.password === 'chloe') {
-    //     const tokenInfo = {
-    //         name: req.body.name,
-    //         role: "club"
-    //     }
-    //     const token = jwt.sign(tokenInfo, jwtSecret)
-    //     console.log(token);
-    //     res.header("Access-Control-Expose-Headers", "x-access-token")
-    //     res.set('x-access-token', token)
-    //     res.status(200).send({ info: 'user connected' })
-    // }
-    // res.send("hello")
-})
-const getToken = req => {
-    if (
-        req.headers.authorization &&
-        req.headers.authorization.split(" ")[0] === "Bearer"
-    ) {
-        return req.headers.authorization.split(" ")[1]
-    }
-    return null
 }
-Router.post('/protected', (req, res) => {
-    const token = getToken(req)
-    console.log(token);
-    jwt.verify(token, jwtSecret, (err, decoded) => {
-        if (err) {
-            console.log(err);
-            return res.status(401).send({ message: "non access" })
-        }
-        return res.status(200).send({ message: "Donne access" })
-    })
-
-})
-Router.get('/espaceClub', (req, res) => {
-    const token = getToken(req)
-    console.log(token);
-    jwt.verify(token, jwtSecret, (err, decoded) => {
-        if (err) {
-            console.log(err);
-            return res.status(401).send({ message: "non access" })
-        }
-        return res.status(200).send({ message: "Donne access" })
-    })
-
-})
-
-module.exports = Router;

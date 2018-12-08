@@ -6,6 +6,8 @@ const isTableNotAuthorized = (table) => {
     return !tables.includes(table.toLowerCase());
 };
 router.get('/:table', (req, res) => {
+    console.log(`User authenticated? ${req.isAuthenticated()}`);
+    console.log(req.params.table);
     if (isTableNotAuthorized(req.params.table)) {
         res.send(400);
         return;
