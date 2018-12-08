@@ -1,9 +1,12 @@
 const express = require('express');
-const connection = require('../helper/db.js')
-const Router = express.Router();
+const connection = require('../helper/conf.js');
+const jwt = require('jsonwebtoken');
 
-Router.get ('/', (req,res) => {
-    connection.query('SELECT * from user', (err, results) => {
+const Router = express.Router();
+const jwtSecret = require('../../jwtSecret');
+
+Router.get('/', (req, res) => {
+    connection.query('SELECT * from club', (err, results) => {
         if (err) {
             res.status(500).send('Erreur lors de la récupération des employés');
         } else {
