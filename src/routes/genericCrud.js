@@ -1,7 +1,7 @@
 const express = require('express');
 const connection = require('../helper/conf')
 const router = express.Router();
-const tables = ['club', 'order'];
+const tables = ['club', 'order', 'project_has_sponsor','project','sponsor'];
 const isTableNotAuthorized = (table) => {
     return !tables.includes(table.toLowerCase());
 };
