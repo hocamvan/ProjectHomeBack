@@ -40,8 +40,8 @@ Router.get('/:id', (req, res) => {
     });
 })
 Router.post('/', (req, res) => {
+    console.log(req.body)
     connection.query('INSERT into sponsor SET ?', req.body, (err, results) => {
-        console.log(results);
         if (err) {
             console.log(err);
             res.status(500).send(`Erreur lors de l'insertion des données`);
