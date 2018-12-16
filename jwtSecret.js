@@ -1,1 +1,1 @@
-module.exports = "mot de pass"
+module.exports = "mysecret1234"
