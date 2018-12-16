@@ -17,3 +17,15 @@ INSERT INTO `allsponsored`.`project_has_sponsor` (`project_id`, `sponsor_id`) VA
 INSERT INTO `allsponsored`.`project_has_sponsor` (`project_id`, `sponsor_id`) VALUES ('4', '2');
 INSERT INTO `allsponsored`.`project_has_sponsor` (`project_id`, `sponsor_id`) VALUES ('5', '4');
 
+INSERT INTO `allsponsored`.`order` (`id`, `delivery_address`, `reference`, `tracking_number`, `contract_id`) VALUES ('1', '5 rue provence', '12345', '123456789', '1');
+INSERT INTO `allsponsored`.`order` (`id`, `delivery_address`, `reference`, `tracking_number`, `contract_id`) VALUES ('2', '9 rue paris', '67890', '1234566789', '2');
+INSERT INTO `allsponsored`.`order` (`id`, `delivery_address`, `reference`, `tracking_number`, `contract_id`) VALUES ('3', '56 rue darguerre', '098765', '0987654321', '3');
+
+ALTER TABLE `allsponsored`.`survey` 
+CHANGE COLUMN `updated_at` `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ;
+
+INSERT INTO `allsponsored`.`survey` (`id`, `status`, `contract_id`) VALUES ('1', 'active', '1');
+INSERT INTO `allsponsored`.`survey` (`id`, `status`, `contract_id`) VALUES ('2', 'active', '2');
+INSERT INTO `allsponsored`.`survey` (`id`, `status`, `contract_id`) VALUES ('3', 'active', '3');
+
+
