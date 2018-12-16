@@ -67,4 +67,24 @@ Router.delete('/:id', (req, res) => {
     })
 })
 
+Router.get('/order/:idcontract', (req, res) => {
+    connection.query('select * from order inner join contract on order.contract_id = contract.id where contract.id = ?',req.params.idcontract, (err, results) => {
+        if (err) {
+            res.status(500).send('Erreur lors de la récupération des employés');
+        } else {
+            res.json(results);
+        }
+    });
+})
+
+Router.get('/suvey/:idcontract', (req, res) => {
+    connection.query('select contract.name, contract.url_contract, contract.url_signed_contract from contract inner join club on contract.club_id = club.id where club.id = ?',req.params.idclub, (err, results) => {
+        if (err) {
+            res.status(500).send('Erreur lors de la récupération des employés');
+        } else {
+            res.json(results);
+        }
+    });
+})
+
 module.exports = Router;

@@ -10,7 +10,8 @@ const sponsor = require('./src/routes/sponsor');
 const project = require('./src/routes/project');
 const user = require('./src/routes/user');
 const signin_club = require('./src/routes/signin_club');
-const signin_admin = require('./src/routes/signin_admin')
+const signin_admin = require('./src/routes/signin_admin');
+const contract = require('./src/routes/contract');
 
 const jwt = require('jsonwebtoken');
 const jwtSecret = require('./jwtSecret');
@@ -51,7 +52,6 @@ const authorize = function (req, res, next) {
 
 }
 
-
 app.use('/signinclub', signin_club);
 app.use('/signinadmin', signin_admin);
 app.use("/user", user);
@@ -60,6 +60,7 @@ app.use("/sponsor", sponsor);
 // app.use("/sponsor", authorize, sponsor);
 //app.use("/project", authorize, project);
 app.use("/project", project);
+app.use('/contract', contract);
 app.use("/api", genericCrud);
 
 
