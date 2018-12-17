@@ -69,7 +69,7 @@ Router.delete('/:id', (req, res) => {
 
     })
 })
-router.post('/uploaddufichier', upload.array('monfichier'), function (req, res, next) {
+Router.post('/uploaddufichier', upload.array('monfichier'), function (req, res, next) {
     req.files.forEach(file => {
         if (file.size > 1024 * 1024 * 3) {
             res.status(400).send("File is too big!")
