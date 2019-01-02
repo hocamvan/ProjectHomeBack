@@ -40,4 +40,29 @@ INSERT INTO `allsponsored`.`survey` (`id`, `status`, `contract_id`) VALUES ('1',
 INSERT INTO `allsponsored`.`survey` (`id`, `status`, `contract_id`) VALUES ('2', 'active', '2');
 INSERT INTO `allsponsored`.`survey` (`id`, `status`, `contract_id`) VALUES ('3', 'active', '3');
 
+Van 18/12
+UPDATE `allsponsored`.`contract` SET `name`='projet CA-MU:50 maillots' WHERE `id`='1';
+UPDATE `allsponsored`.`contract` SET `name`='projet CA-Nantes:10parkas' WHERE `id`='2';
+
+INSERT INTO `allsponsored`.`contract` (`id`, `project_id`, `club_id`, `name`, `url_contract`, `url_signed_contract`, `status`) VALUES ('4', '1', '3', 'projet CA-ABC: 50 maillots', 'www.contract.com', 'dahoidhazoid', 'active');
+
+VAN 28/12
+INSERT INTO `allsponsored`.`product` (`id`, `name`, `category`) VALUES ('1', 'maillot', 'vetement');
+INSERT INTO `allsponsored`.`product` (`id`, `name`, `category`) VALUES ('2', 'short', 'vetement');
+INSERT INTO `allsponsored`.`product` (`id`, `name`, `category`) VALUES ('3', 'parka', 'vetement');
+INSERT INTO `allsponsored`.`product` (`id`, `name`, `category`) VALUES ('4', 'polo', 'vetement');
+INSERT INTO `allsponsored`.`product` (`id`, `name`, `category`) VALUES ('5', 'chaussettes', 'vetement');
+INSERT INTO `allsponsored`.`product` (`id`, `name`, `category`) VALUES ('6', 'sac', 'equipement');
+INSERT INTO `allsponsored`.`product` (`id`, `name`, `category`) VALUES ('7', 'k-way', 'vetement');
+INSERT INTO `allsponsored`.`product` (`id`, `name`, `category`) VALUES ('8', 'veste', 'vetement');
+
+
+INSERT INTO `allsponsored`.`order_has_product` (`product_id`, `order_id`, `quantity`, `size`, `color`) VALUES ('1', '1', '10', 'M', 'blanc');
+INSERT INTO `allsponsored`.`order_has_product` (`product_id`, `order_id`, `quantity`, `size`, `color`) VALUES ('2', '1', '10', 'M', 'blanc');
+INSERT INTO `allsponsored`.`order_has_product` (`product_id`, `order_id`, `quantity`, `size`, `color`) VALUES ('3', '1', '10', 'M', 'bleu');
+INSERT INTO `allsponsored`.`order_has_product` (`product_id`, `order_id`, `quantity`, `size`, `color`) VALUES ('4', '2', '20', 'S', 'rouge');
+INSERT INTO `allsponsored`.`order_has_product` (`product_id`, `order_id`, `quantity`, `size`, `color`) VALUES ('5', '2', '15', 'L', 'rouge');
+INSERT INTO `allsponsored`.`order_has_product` (`product_id`, `order_id`, `quantity`, `size`, `color`) VALUES ('6', '3', '30', 'S', 'jaune');
+INSERT INTO `allsponsored`.`order_has_product` (`product_id`, `order_id`, `quantity`, `size`, `color`) VALUES ('7', '3', '30', 'M', 'jaune');
+
 
