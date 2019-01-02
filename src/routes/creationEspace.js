@@ -9,8 +9,8 @@ router.get('/creationespace', (req, res) => {
         port: 2525,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: "name user", // generated user
-            pass: "password user" // generated pass
+            user:"7a8075e4a6721f", // generated user
+            pass: "797fe7e2074020" // generated pass
         }
 
     });
